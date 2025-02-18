@@ -1,7 +1,24 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from 'react';
 
 export default function CartPage() {
+  const [quantity, setQuantity] = useState(1);
+  const price = 12999;
+  const total = price * quantity;
+
+  const handleIncrease = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(prev => prev - 1);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,14 +42,20 @@ export default function CartPage() {
                   <h3 className="text-lg font-semibold text-gray-900">
                     Focal Clear
                   </h3>
-                  <p className="text-orange-500 font-semibold">¥12,999</p>
+                  <p className="text-orange-500 font-semibold">¥{price}</p>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100">
+                  <button 
+                    onClick={handleDecrease}
+                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100"
+                  >
                     -
                   </button>
-                  <span className="w-8 text-center">1</span>
-                  <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100">
+                  <span className="w-8 text-center">{quantity}</span>
+                  <button 
+                    onClick={handleIncrease}
+                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100"
+                  >
                     +
                   </button>
                 </div>
@@ -64,7 +87,7 @@ export default function CartPage() {
 
               <div className="flex justify-between text-gray-600">
                 <span>商品小计</span>
-                <span>¥12,999</span>
+                <span>¥{total}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>运费</span>
@@ -74,7 +97,7 @@ export default function CartPage() {
               <div className="border-t pt-4 mt-4">
                 <div className="flex justify-between text-lg font-semibold">
                   <span>总计</span>
-                  <span className="text-orange-500">¥12,999</span>
+                  <span className="text-orange-500">¥{total}</span>
                 </div>
               </div>
 

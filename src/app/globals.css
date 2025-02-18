@@ -3,19 +3,80 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 250, 250, 250;
+  --background-end-rgb: 255, 255, 255;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+}
+
+/* 添加全局动画效果 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 毛玻璃效果 */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 优化按钮样式 */
+.btn-primary {
+  @apply bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-lg
+    shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+}
+
+/* 卡片悬浮效果 */
+.hover-card {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* 导航栏样式 */
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50 glass-effect;
+}
+
+/* 产品卡片样式 */
+.product-card {
+  @apply bg-white rounded-xl shadow-md overflow-hidden hover-card;
+}
+
+/* 购物车样式 */
+.cart-item {
+  @apply glass-effect rounded-lg p-4 mb-4 animate-fade-in;
+}
+
+/* 输入框样式 */
+.input-field {
+  @apply border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-orange-500
+    transition-colors duration-300;
+}
+
+/* 标题样式 */
+.section-title {
+  @apply text-3xl font-bold mb-8 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent;
+}
+
+/* 图片悬浮效果 */
+.image-hover {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* 价格标签样式 */
+.price-tag {
+  @apply text-lg font-bold text-orange-500 bg-orange-50 px-3 py-1 rounded-full;
 }
